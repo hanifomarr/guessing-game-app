@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import StartGameScreen from "./screens/StartGameScreen";
 import { useState } from "react";
 import GameScreen from "./screens/GameScreen";
@@ -16,7 +16,7 @@ export default function App() {
     screen = <GameScreen />;
   }
 
-  return <View>{screen}</View>;
+  return <SafeAreaView>{screen}</SafeAreaView>;
 }
 
 const styles = StyleSheet.create({});
