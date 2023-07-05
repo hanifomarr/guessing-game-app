@@ -1,13 +1,28 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import Title from "../components/Title";
+import React, { useState } from "react";
+import Title from "../components/ui/Title";
+import GuessNumber from "../components/game/GuessNumber";
 
-const GameScreen = () => {
+function generateRandomNumer(min, max, exclude) {
+  const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+  if (randomNumber === exclude) {
+    return generateRandomNumer(min, max, exclude);
+  } else {
+    return randomNumber;
+  }
+}
+
+const GameScreen = ({ choosenNum }) => {
+  const guessNumber = generateRandomNumer(1, 100, choosenNum);
+  const [currentGuessNumber, setcurrentGuessNumber] = useState(guessNumber);
+  console.log(choosenNum);
+
   return (
     <View style={styles.gameContainer}>
       <View>
         <Title>Opponent's Guess</Title>
-        {/* GUESS NUMBER */}
+        <GuessNumber>{currentGuessNumber}</GuessNumber>
       </View>
       <View>
         <Text>Higher or Lower?</Text>

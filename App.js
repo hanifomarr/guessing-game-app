@@ -13,7 +13,7 @@ export default function App() {
   let screen = <StartGameScreen onSelectNumber={userNumberhandler} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen choosenNum={userNumber} />;
   }
 
   return <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>;
