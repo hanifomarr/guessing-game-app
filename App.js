@@ -16,7 +16,11 @@ export default function App() {
     screen = <GameScreen />;
   }
 
-  return <SafeAreaView>{screen}</SafeAreaView>;
+  return <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>;
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  rootScreen: {
+    flex: 1,
+  },
+});
