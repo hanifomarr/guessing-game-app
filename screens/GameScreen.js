@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../components/ui/Title";
 import GuessNumber from "../components/game/GuessNumber";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -17,10 +17,20 @@ function generateRandomNumer(min, max, exclude) {
 let min = 1;
 let max = 100;
 
-const GameScreen = ({ choosenNum }) => {
+const GameScreen = ({ choosenNum, onGameOver }) => {
   const guessNumber = generateRandomNumer(min, max, choosenNum);
-  const [currentGuessNumber, setcurrentGuessNumber] = useState(guessNumber);
+  const [currentGuessNumber, setcurrentGuessNumber] = useState(() =>
+    generateRandomNumer(min, max, guessNumber)
+  );
   console.log(choosenNum);
+  console.log(currentGuessNumber);
+  console.log(guessNumber);
+
+  useEffect(() => {
+    if (currentGuessNumber === choosenNum) {
+      onGameOver();
+    }
+  }, [currentGuessNumber, guessNumber, onGameOver]);
 
   function nextGuessHandler(direction) {
     if (
@@ -34,7 +44,7 @@ const GameScreen = ({ choosenNum }) => {
     if (direction === "lower") {
       max = currentGuessNumber;
     } else {
-      min = currentGuessNumber + 1;
+      min = currentGuessNumber;
     }
     const newGuessNumber = generateRandomNumer(min, max, currentGuessNumber);
     setcurrentGuessNumber(newGuessNumber);
